@@ -1,7 +1,10 @@
 # nl README
 
+## Prerequisites
+Maven, which needs to be installed (mvn) or downloaded (./mvnw)
+
 ## Run the demo
-mvn run
+./mvnw spring-boot:run
 
 ## Run unit tests
 mvn test
