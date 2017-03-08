@@ -1,0 +1,17 @@
+
+<div>
+	<div class="form-group"
+		style="margin-top:0px; display:inline-block;vertical-align: top;width:40%;"
+		ng-class="{'has-error': lendForm.endpoint.$invalid }">
+	<form ng-controller="lendCtrl" ng-submit="submitForm()">
+		
+		<label>Lend</label>
+		<span class="error" ng-show="form.input.$error.required">Required!</span><br>
+		
+		<input class="form-control" type="text" name="personId" ng-model="form.personId" required />
+		<input class="form-control" type="text" name="bookId" ng-model="form.bookId" required />
+		
+		<button type="submit">submit</button>
+	</form>
+	</div>
+</div>

@@ -1,0 +1,15 @@
+
+<div>
+	<h1>Books</h1>
+	
+	<label>Search: <input ng-model="searchText"></label>
+	<table id="searchTextResults">
+		<tr><th>title</th><th>author</th><th>isbn</th><th>id</th>
+		<tr ng-repeat="book in bookList | filter:searchText">
+		    <td><input type="checkbox"> <span ng-bind="book.title"></span></td>
+		    <td><span ng-bind="book.author"></span></td>
+		    <td><span ng-bind="book.isbn"></span></td>
+		    <td><span ng-bind="book.id"></span></td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,22 @@
+<div>
+	<h1>Persons</h1>
+	
+	<form ng-controller="personsCtrl" ng-submit="submitForm()">
+		<input class="form-control" type="text" name="name" ng-model="form.name" />
+		<input class="form-control" type="text" name="phoneNumber" ng-model="form.phoneNumber" />
+		<input class="form-control" type="text" name="emailAddress" ng-model="form.emailAddress" />
+		
+		<button type="submit">submit</button>
+	</form>
+	
+	<label>Search: <input ng-model="searchText"></label>
+	<table id="searchTextResults">
+		<tr><th>Name</th><th>Phone number</th><th>Email address</th><th>id</th>
+		<tr ng-repeat="person in personList | filter:searchText">
+		    <td><!--input type="radio"--> <span ng-bind="person.name"></span></td>
+		    <td><span ng-bind="person.phoneNumber"></span></td>
+		    <td><span ng-bind="person.emailAddress"></span></td>
+		    <td><span ng-bind="person.id"></span></td>
+		</tr>
+	</table>
+</div>
