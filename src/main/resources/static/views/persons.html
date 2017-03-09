@@ -1,15 +1,28 @@
+
+<script>
+$(document).ready(function(){
+    $("h1").click(function(){
+        $("p").toggle();
+    });
+});
+</script>
+
 <div>
 	<h1>Persons</h1>
+	<p>add, list, filter persons</p>
+	<p>jQuery toggle demo, click heading</p>
+	<p>bootstrap</p>
 	
 	<form ng-controller="personsCtrl" ng-submit="submitForm()">
-		<input class="form-control" type="text" name="name" ng-model="form.name" />
-		<input class="form-control" type="text" name="phoneNumber" ng-model="form.phoneNumber" />
-		<input class="form-control" type="text" name="emailAddress" ng-model="form.emailAddress" />
+		<div class="col-sm-4"><label for="name">Name</label><input class="form-control" type="text" id="name" ng-model="form.name" /></div>
+		<div class="col-sm-4"><label for="phoneNumber">Phone number</label><input class="form-control" type="text" id="phoneNumber" ng-model="form.phoneNumber" /></div>
+		<div class="col-sm-4"><label for="emailAddress">Email address</label><input class="form-control" type="text" id="emailAddress" ng-model="form.emailAddress" /></div>
 		
-		<button type="submit">submit</button>
+		<div class="col-sm-12"><button type="submit">submit</button></div>
 	</form>
 	
-	<label>Search: <input ng-model="searchText"></label>
+	<label for="search">Search:</label> <input id="search" ng-model="searchText">
+	
 	<table id="searchTextResults">
 		<tr><th>Name</th><th>Phone number</th><th>Email address</th><th>id</th>
 		<tr ng-repeat="person in personList | filter:searchText">

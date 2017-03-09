@@ -1,15 +1,43 @@
 
+<style>
+.odd {
+  color: black;
+  background-color: #CCCCCC;
+}
+.even {
+  color: black;
+}
+</style>
+
 <div>
 	<h1>Books</h1>
+	<p>list, filter books</p>
+	<p>jQuery toggle, click heading</p>
+	<p>bootstrap</p>
 	
-	<label>Search: <input ng-model="searchText"></label>
-	<table id="searchTextResults">
-		<tr><th>title</th><th>author</th><th>isbn</th><th>id</th>
-		<tr ng-repeat="book in bookList | filter:searchText">
-		    <td><input type="checkbox"> <span ng-bind="book.title"></span></td>
-		    <td><span ng-bind="book.author"></span></td>
-		    <td><span ng-bind="book.isbn"></span></td>
-		    <td><span ng-bind="book.id"></span></td>
-		</tr>
-	</table>
+	<div class="row">
+		<div class="col-xs-12"><input id="search" ng-model="searchText" class="form-control" placeholder="Search books"></div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="col-xs-4">Title</div><div class="col-xs-4">Author</div><div class="col-xs-2">ISBN</div><div class="col-xs-2">ID</div>
+	</div>
+	<div id="searchTextResults">
+		<div class="row" ng-repeat="book in bookList | filter:searchText">
+			<div class="col-sm-4" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="book.title"></div>
+			<div class="col-sm-4" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="book.author"></div>
+			<div class="col-sm-2" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="book.isbn"></div>
+			<div class="col-sm-2" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="book.id"></div>
+		</div>
+	</div>
 </div>
+
+<script>
+$(document).ready(function(){
+    $("h1").click(function(){
+        $("p").toggle();
+    });
+});
+
+document.getElementById("search").focus();
+</script>
