@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,16 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/nl")
 public class LibController {
 
+	private static AtomicBoolean dataLoaded = new AtomicBoolean(false);
+	
 	@Autowired
 	private LibDao libDao;
 	
 	@RequestMapping(value="/loaddata", method=RequestMethod.GET)
 	public String loadData() {
-		String clazzPath = LibController.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		String newPath = clazzPath.substring(0, clazzPath.lastIndexOf("target")) + "data/LibData.csv";
-		List<Book> books = DataLoader.readBooksFromCSV(newPath);
-		for (Book book : books) {
-			libDao.addBook(book);
+		synchronized (dataLoaded) {
+			if (dataLoaded.get() == false) {
+				String clazzPath = LibController.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+				String newPath = clazzPath.substring(0, clazzPath.lastIndexOf("target")) + "data/LibData.csv";
+				List<Book> books = DataLoader.readBooksFromCSV(newPath);
+				for (Book book : books) {
+					libDao.addBook(book);
+				}
+				dataLoaded.set(true);
+			}
 		}
 		return "DONE";
 	}

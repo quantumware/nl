@@ -8,6 +8,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +58,16 @@ public class LibDaoJpa implements LibDao {
 	public List<Book> findAllBook() {
 		Query query = em.createNamedQuery("allBooks");
 		List<Book> result = query.getResultList();
+		/*
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Book> query = cb.createQuery(Book.class);
+		Root<Book> employee = query.from(Book.class);
+		Join<PersonBook> project = employee.join("persons");
+		Subquery<PersonBook> subquery = query.subquery(PersonBook.class);
+		Root<PersonBook> subProject = query.from(PersonBook.class);
+		subquery.where(cb.and(cb.equal(project, subProject), cb.or(cb.equal(subProject.get("status"), "RETURNED")), cb.isNull(subProject.get("status"))));
+		query.where(cb.exists(subquery));
+		*/
 		return result;
 	}
 

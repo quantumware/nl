@@ -22,7 +22,7 @@ angular.module('nl', ['ngRoute'])
 	});
   })
 
-  .controller('personsCtrl', function($scope, $routeParams, $http) {
+  .controller('personsCtrl', function($scope, $routeParams, $location, $http) {
     $scope.name = 'personsCtrl';
     $scope.params = $routeParams;
 	$http.get('/nl/persons').success(function(data) {
@@ -32,7 +32,6 @@ angular.module('nl', ['ngRoute'])
     	$http.get("/nl/addperson?name=" + $scope.form.name + "&phoneNumber=" + $scope.form.phoneNumber + "&emailAddress=" + $scope.form.emailAddress)
     	.success(function(data){
 	        console.log("OK", data);
-	    	$scope.apply();
 	    });
     };
   })
@@ -40,13 +39,23 @@ angular.module('nl', ['ngRoute'])
   .controller('lendCtrl', function($scope, $routeParams, $http) {
     $scope.name = 'lendCtrl';
     $scope.params = $routeParams;
+    //var personId = 1;
     $scope.submitForm = function() {
     	//alert("form:" + $scope.form);
+		personId = $scope.form.personId;
+		alert(personId);
     	$http.post("/nl/lend/" + $scope.form.personId + "/" + $scope.form.bookId)
     	.success(function(data){
 	        console.log("OK", data)
 	    });
     };
+    //alert(personId);
+    /*if (personId != undefined) {
+		$http.get("/nl/booklent/" + personId)
+		.success(function(data){
+	        $scope.bookList = data;
+	    });
+	}*/
   })
  
   .config(function($locationProvider, $routeProvider) {

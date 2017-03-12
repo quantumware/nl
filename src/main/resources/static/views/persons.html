@@ -1,35 +1,54 @@
 
+<style>
+.odd {
+  color: black;
+  background-color: #CCCCCC;
+}
+.even {
+  color: black;
+}
+</style>
+
 <script>
 $(document).ready(function(){
     $("h1").click(function(){
         $("p").toggle();
     });
 });
+$('#submit').click(function() {
+    location.reload();
+});
 </script>
 
 <div>
 	<h1>Persons</h1>
 	<p>add, list, filter persons</p>
-	<p>jQuery toggle demo, click heading</p>
-	<p>bootstrap</p>
+	<p>jQuery</p>
+	<p>Bootstrap</p>
 	
 	<form ng-controller="personsCtrl" ng-submit="submitForm()">
-		<div class="col-sm-4"><label for="name">Name</label><input class="form-control" type="text" id="name" ng-model="form.name" /></div>
-		<div class="col-sm-4"><label for="phoneNumber">Phone number</label><input class="form-control" type="text" id="phoneNumber" ng-model="form.phoneNumber" /></div>
-		<div class="col-sm-4"><label for="emailAddress">Email address</label><input class="form-control" type="text" id="emailAddress" ng-model="form.emailAddress" /></div>
-		
-		<div class="col-sm-12"><button type="submit">submit</button></div>
+		<div class="row">
+			<div class="col-sm-4"><label for="name">Name</label><input class="form-control" type="text" id="name" ng-model="form.name" /></div>
+			<div class="col-sm-3"><label for="phoneNumber">Phone number</label><input class="form-control" type="text" id="phoneNumber" ng-model="form.phoneNumber" /></div>
+			<div class="col-sm-4"><label for="emailAddress">Email address</label><input class="form-control" type="text" id="emailAddress" ng-model="form.emailAddress" /></div>
+			<div class="col-sm-1"><label for="submit"><br /></label><button id="submit" type="submit" class="form-control">Submit</button></div>
+		</div>
 	</form>
+	<hr />	
+	<div class="row">
+		<div class="col-xs-12"><input id="search" ng-model="searchText" class="form-control" placeholder="Search persons"></div>
+	</div>
+	<br />
 	
-	<label for="search">Search:</label> <input id="search" ng-model="searchText">
-	
-	<table id="searchTextResults">
-		<tr><th>Name</th><th>Phone number</th><th>Email address</th><th>id</th>
-		<tr ng-repeat="person in personList | filter:searchText">
-		    <td><!--input type="radio"--> <span ng-bind="person.name"></span></td>
-		    <td><span ng-bind="person.phoneNumber"></span></td>
-		    <td><span ng-bind="person.emailAddress"></span></td>
-		    <td><span ng-bind="person.id"></span></td>
-		</tr>
-	</table>
+	<div class="row">
+		<div class="col-xs-4">Name</div><div class="col-xs-4">Phone number</div><div class="col-xs-2">Email address</div><div class="col-xs-2">ID</div>
+	</div>
+	<div id="searchTextResults">
+		<div class="row" ng-repeat="person in personList | filter:searchText">
+			<div class="col-sm-4" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="person.name"></div>
+			<div class="col-sm-4" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="person.phoneNumber"></div>
+			<div class="col-sm-2" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="person.emailAddress"></div>
+			<div class="col-sm-2" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="person.id"></div>
+		</div>
+	</div>
 </div>

@@ -3,8 +3,6 @@ package nl;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,13 +17,13 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-//@Access(AccessType.PROPERTY)
 @Table(name="BOOK")
 @NamedQueries(value={
 		@NamedQuery(name="byAuthor", lockMode=LockModeType.NONE,
 				query="SELECT b.title FROM Book b WHERE b.author = :author"),
 		@NamedQuery(name="allBooks", lockMode=LockModeType.NONE,
 				query="SELECT b FROM Book b")
+//				query="SELECT b FROM Book b JOIN b.persons p WHERE EXISTS (SELECT pb FROM PersonBook pb WHERE p = pb AND (pb.status='RETURNED' OR pb.status IS NULL)")
 })
 public class Book {
 	

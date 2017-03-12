@@ -1,10 +1,12 @@
-# nl README
+# nl
 
 ## Prerequisites
-Maven, which needs to be installed (mvn) or downloaded (./mvnw)
+Maven, which needs to be installed
 
 ## Run the demo
-./mvnw spring-boot:run
+mvn spring-boot:run
+or
+mvn spring-boot:run -Dserver.port=9000
 
 ## Run unit tests
 mvn test

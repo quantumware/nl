@@ -51,7 +51,7 @@ public class LibControllerTest {
     	//[{"id":1,"name":"test","phoneNumber":"1234567","emailAddress":"xx@xx.xx","books":[]}]
     	//[{"id":1,"name":"test","phoneNumber":"1234567","emailAddress":"xx@xx.xx"}]
     	
-    	mvc.perform(MockMvcRequestBuilders.get(PREFIX + "/lend/1/1").accept(MediaType.APPLICATION_JSON))
+    	mvc.perform(MockMvcRequestBuilders.post(PREFIX + "/lend/1/1").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().string("true"));
     	

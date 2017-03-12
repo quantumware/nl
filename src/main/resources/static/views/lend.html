@@ -1,17 +1,42 @@
 
+<!--script>
+$('#submit').click(function() {
+    location.reload();
+});
+</script-->
+
 <div>
-	<div class="form-group"
-		style="margin-top:0px; display:inline-block;vertical-align: top;width:40%;"
-		ng-class="{'has-error': lendForm.endpoint.$invalid }">
+	<h1>Lend</h1>
 	<form ng-controller="lendCtrl" ng-submit="submitForm()">
-		
-		<label>Lend</label>
-		<span class="error" ng-show="form.input.$error.required">Required!</span><br>
-		
-		<input class="form-control" type="text" name="personId" ng-model="form.personId" required />
-		<input class="form-control" type="text" name="bookId" ng-model="form.bookId" required />
-		
-		<button type="submit">submit</button>
+		<div class="row">
+			<div class="col-sm-4">
+				<label for="personId">personId</label>
+				<input class="form-control" type="text" id="personId" name="personId" ng-model="form.personId" />
+			</div>
+			<div class="col-sm-4">
+				<label for="bookId">bookId</label>
+				<input class="form-control" type="text" id="bookId" name="bookId" ng-model="form.bookId" />
+			</div>
+			<div class="col-sm-4">
+				<label for="submit"><br /></label>
+				<button class="form-control" id="submit" type="submit">submit</button>
+			</div>
+		</div>
 	</form>
+	<!--hr />
+	<div class="row">
+		<div class="col-xs-12"><input id="search" ng-model="searchText" class="form-control" placeholder="Search books"></div>
 	</div>
+	<br />
+	<div class="row">
+		<div class="col-xs-4">Title</div><div class="col-xs-4">Author</div><div class="col-xs-2">ISBN</div><div class="col-xs-2">ID</div>
+	</div>
+	<div id="searchTextResults">
+		<div class="row" ng-repeat="book in bookList | filter:searchText">
+			<div class="col-sm-4" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="book.title"></div>
+			<div class="col-sm-4" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="book.author"></div>
+			<div class="col-sm-2" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="book.isbn"></div>
+			<div class="col-sm-2" ng-class-odd="'odd'" ng-class-even="'even'" ng-bind="book.id"></div>
+		</div>
+	</div-->
 </div>
