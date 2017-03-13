@@ -1,6 +1,7 @@
 package nl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -34,7 +35,9 @@ public class LibDaoJpa implements LibDao {
 			tx.commit();
 			return true;
 		} catch (Exception e) {
-			tx.rollback();
+			if (tx.isActive()) {
+				tx.rollback();
+			}
 			return false;
 		}
 	}
@@ -92,7 +95,9 @@ public class LibDaoJpa implements LibDao {
 			tx.commit();
 			return person.getId();
 		} catch (Exception e) {
-			tx.rollback();
+			if (tx.isActive()) {
+				tx.rollback();
+			}
 			return -1;
 		}
 	}
@@ -105,22 +110,30 @@ public class LibDaoJpa implements LibDao {
 			tx.commit();
 			return true;
 		} catch (Exception e) {
-			tx.rollback();
+			if (tx.isActive()) {
+				tx.rollback();
+			}
 			return false;
 		}
 	}
 
 	@Override
 	public boolean lend(long personId, long bookId) {
-		PersonBook pb = new PersonBook(personId, bookId);
+		PersonBook pb = em.find(PersonBook.class, new PersonBookId(personId, bookId));
+		if (pb == null) {
+			pb = new PersonBook(personId, bookId);
+		}
 		pb.setStatus(Status.LENT);
+		pb.setAffectedTimestamp(new Date());
 		try {
 			tx.begin();
 			em.persist(pb);
 			tx.commit();
 			return true;
 		} catch (Exception e) {
-			tx.rollback();
+			if (tx.isActive()) {
+				tx.rollback();
+			}
 			return false;
 		}
 	}

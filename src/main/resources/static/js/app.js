@@ -15,6 +15,7 @@ angular.module('nl', ['ngRoute'])
   })
 
   .controller('booksCtrl', function($scope, $routeParams, $http) {
+	  $scope.template = {name:"booklist.html", url:"booklist.html"};
     $scope.name = 'booksCtrl';
     $scope.params = $routeParams;
 	$http.get('/nl/books').success(function(data) {
@@ -40,13 +41,18 @@ angular.module('nl', ['ngRoute'])
     $scope.name = 'lendCtrl';
     $scope.params = $routeParams;
     //var personId = 1;
+    $scope.bookList = [];
     $scope.submitForm = function() {
     	//alert("form:" + $scope.form);
-		personId = $scope.form.personId;
-		alert(personId);
+		//personId = $scope.form.personId;
+		//alert(personId);
     	$http.post("/nl/lend/" + $scope.form.personId + "/" + $scope.form.bookId)
     	.success(function(data){
 	        console.log("OK", data)
+	    });
+		$http.get("/nl/booklent/" + $scope.form.personId)
+		.success(function(data){
+	        $scope.bookList = data;
 	    });
     };
     //alert(personId);

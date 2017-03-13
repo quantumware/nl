@@ -7,8 +7,13 @@ public class PersonBookId implements Serializable {
   private long personId;
 
   private long bookId;
+  
+  public PersonBookId(long personId, long bookId) {
+	  this.personId = personId;
+	  this.bookId = bookId;
+  }
 
-  public int hashCode() {
+public int hashCode() {
     return (int)(personId + bookId);
   }
 

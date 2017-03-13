@@ -9,17 +9,6 @@
 }
 </style>
 
-<script>
-$(document).ready(function(){
-    $("h1").click(function(){
-        $("p").toggle();
-    });
-});
-$('#submit').click(function() {
-    location.reload();
-});
-</script>
-
 <div>
 	<h1>Persons</h1>
 	<p>add, list, filter persons</p>
@@ -52,3 +41,15 @@ $('#submit').click(function() {
 		</div>
 	</div>
 </div>
+
+<script>
+$(document).ready(function(){
+    $("h1").click(function(){
+        $("p").toggle();
+    });
+});
+$('#submit').click(function() {
+    location.reload();
+});
+document.getElementById("name").focus();
+</script>
